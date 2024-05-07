@@ -3,13 +3,14 @@ import { DownloadModule } from './api/download/download.module';
 import { ApiKeyGuard, ApiKeysModule } from 'nestjs-api-keys';
 import { ENV } from './constants/env/env.constant';
 import { APP_GUARD } from '@nestjs/core';
+import { NavigationModule } from './api/navigation/navigation.module';
 import { PuppeteerModule } from './providers/puppeteer/puppeteer.module';
 
 const GLOBAL_PERMISSION = 'download.all';
 
 @Module({
   imports: [
-    PuppeteerModule,
+    PuppeteerModule.create(),
     ApiKeysModule.register({
       apiKeys: [
         {
@@ -20,6 +21,7 @@ const GLOBAL_PERMISSION = 'download.all';
       ],
     }),
     DownloadModule,
+    NavigationModule,
   ],
   providers: [
     {
